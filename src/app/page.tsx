@@ -34,30 +34,36 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-[#0B1020] flex flex-col items-center justify-center p-4 font-sans">
 
-      {/* INFINITY LOGO WITH ANIMATION - 2nd pic la */}
-      <div className="relative">
-        <img
-          src="/logo.png"
-          alt="Nexlance Logo"
-          className="w-32 h-20 object-contain"
-          style={{ animation: 'logoFloat 3s ease-in-out infinite' }}
-        />
-        <div className="absolute inset-0 blur-xl bg-gradient-to-r from-yellow-400 via-purple-500 to-pink-500 opacity-30 -z-10"
-             style={{ animation: 'glowPulse 3s ease-in-out infinite' }}>
-        </div>
-        <style>{`
-          @keyframes logoFloat {
-            0%,100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-8px) scale(1.05); }
-          }
-          @keyframes glowPulse {
-            0%,100% { opacity: 0.3; }
-            50% { opacity: 0.6; }
-          }
-        `}</style>
+      {/* CLEAR ANIMATION LOGO - Nee 2nd pic exact */}
+      <div style={{ animation: 'float 3s ease-in-out infinite' }}>
+        <svg width="180" height="90" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#FFD600">
+                <animate attributeName="stop-color" values="#FFD600;#00D1FF;#8A2BE2;#FF6EC7;#FF8A00;#FFD600" dur="3s" repeatCount="indefinite"/>
+              </stop>
+              <stop offset="50%" stopColor="#8A2BE2">
+                <animate attributeName="stop-color" values="#8A2BE2;#FF6EC7;#FF8A00;#FFD600;#00D1FF;#8A2BE2" dur="3s" repeatCount="indefinite"/>
+              </stop>
+              <stop offset="100%" stopColor="#FF8A00">
+                <animate attributeName="stop-color" values="#FF8A00;#FFD600;#00D1FF;#8A2BE2;#FF6EC7;#FF8A00" dur="3s" repeatCount="indefinite"/>
+              </stop>
+            </linearGradient>
+          </defs>
+          {/* Main infinity with arrow - thick */}
+          <path d="M 15 50 Q 5 15, 50 30 Q 95 50, 110 50 Q 125 50, 170 30 Q 195 20, 185 50 Q 175 80, 130 75 Q 95 70, 110 50 L 180 5 L 145 15 L 120 55"
+            fill="none" stroke="url(#g)" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round"/>
+          {/* Bottom dark shadow line like 2nd pic */}
+          <path d="M 35 55 Q 75 70, 110 50 Q 145 30, 185 40"
+            fill="none" stroke="#312E81" strokeWidth="10" strokeLinecap="round" opacity="0.9"/>
+          <path d="M 50 35 Q 85 25, 110 35"
+            fill="none" stroke="#312E81" strokeWidth="8" strokeLinecap="round" opacity="0.9"/>
+        </svg>
       </div>
 
-      <h1 className="text-white text-xl font-bold mt-4">Nexlance Collections System</h1>
+      <style>{`@keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-10px) scale(1.05)}}`}</style>
+
+      <h1 className="text-white text-xl font-bold mt-2">Nexlance Collections System</h1>
       <p className="text-gray-400 text-[10px] tracking-widest mt-1">PRD V0.1 • MANDATORY TOTP 2FA</p>
 
       <div className="bg-white rounded-2xl p-6 w-full max-w-[380px] mt-6 shadow-2xl">
@@ -72,7 +78,7 @@ export default function LoginPage() {
         <p className="text-[10px] text-center text-gray-400 font-bold">QUICK ROLE SWITCHER</p>
         <div className="grid grid-cols-2 gap-2 mt-2">
           {Object.keys(ROLES_MAP).map(c=>(
-            <button key={c} onClick={()=>{setCode(c); setPass("Password#1234")}} className="border rounded-lg p-2 text-left bg-gray-50">
+            <button key={c} onClick={()=>{setCode(c); setPass("Password#1234")}} className="border rounded-lg p-2 text-left bg-gray-50 hover:bg-gray-100">
               <div className="text-[11px] font-bold">{c}</div>
               <div className="text-[9px] text-gray-500">Pass: Password#1234</div>
             </button>
