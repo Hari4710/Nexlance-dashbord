@@ -1,4 +1,3 @@
-
 "use client";
 import { useState, useEffect } from "react";
 
@@ -13,7 +12,16 @@ export default function Home() {
   const [tick, setTick] = useState(0);
   const [qIdx, setQIdx] = useState(0);
 
-  // AGENT WORKLIST FORM STATES - WORKING!
+  // LOGOUT FUNCTION - ADDED - EMI REMOVE CHEYALE DU
+  const doLogout = () => {
+    if (confirm("Logout avvana bro?")) {
+      document.cookie = "finalAuthToken=; path=/; max-age=0";
+      document.cookie = "temp2faToken=; path=/; max-age=0";
+      localStorage.clear();
+      window.location.href = "/";
+    }
+  };
+
   const [contactMode, setContactMode] = useState("Call");
   const [disposition, setDisposition] = useState("PTP Taken");
   const [promisedAmt, setPromisedAmt] = useState("");
@@ -76,7 +84,7 @@ export default function Home() {
     if (form.teamLeader === "Select Team Leader") { alert("Team Leader select chey!"); return; }
     const newId = `USR_${form.fullName.split(" ")[0].toUpperCase()}_${Date.now().toString().slice(-4)}`;
     const newUser = { id: newId, name: form.fullName, email: form.email, role: form.role.toUpperCase().replace(" ", "_"), tl: form.teamLeader, totp: true };
-    setUsers([newUser, ...users]);
+    setUsers([newUser,...users]);
     setForm({ fullName: "", email: "", role: "Agent", teamLeader: "Select Team Leader" });
     setShowProvision(false);
     alert(`${newUser.name} Provisioned Successfully! - WORK!`);
@@ -92,7 +100,7 @@ export default function Home() {
       time: new Date().toLocaleTimeString(),
       next: followUpDate
     };
-    setActivityLogs([newLog, ...activityLogs]);
+    setActivityLogs([newLog,...activityLogs]);
     alert(`✅ Disposition Saved!\nAccount: ${queueAccounts[qIdx].name}\nDisposition: ${disposition}\nAmount: ₹${promisedAmt}\nFollow-up: ${followUpDate}\n\nAdvancing to next account - WORK!`);
     setQIdx((qIdx + 1) % queueAccounts.length);
     setPromisedAmt("");
@@ -114,14 +122,19 @@ export default function Home() {
           {menu.map((m) => {
             const sel = active === m;
             return (
-              <div key={m} onClick={() => setActive(m)} className={`px-4 py-3 rounded-xl cursor-pointer text-[13px] flex items-center gap-3 transition-all ${sel ? "bg-[#3b82f6] text-white font-bold shadow-lg" : "hover:bg-white/10"}`}>
-                <span className="text-[14px]">{m === "Dashboards & MIS" ? "📊" : m.includes("Agent") ? "📞" : m.includes("Allocation") ? "🔀" : m.includes("Payment") ? "💳" : m.includes("Client") ? "🏢" : m.includes("User") ? "👥" : "🛡️"}</span>
+              <div key={m} onClick={() => setActive(m)} className={`px-4 py-3 rounded-xl cursor-pointer text-[13px] flex items-center gap-3 transition-all ${sel? "bg-[#3b82f6] text-white font-bold shadow-lg" : "hover:bg-white/10"}`}>
+                <span className="text-[14px]">{m === "Dashboards & MIS"? "📊" : m.includes("Agent")? "📞" : m.includes("Allocation")? "🔀" : m.includes("Payment")? "💳" : m.includes("Client")? "🏢" : m.includes("User")? "👥" : "🛡️"}</span>
                 <span className="flex-1">{m}</span>
                 {m.includes("Agent") && <span className="text-[7px] bg-white/10 px-1.5 py-0.5 rounded">Priority Sorted</span>}
               </div>
             );
           })}
         </nav>
+        {/* LOGOUT IN SIDEBAR - ADDED - EMI REMOVE CHEYALE DU */}
+        <div className="p-3 border-t border-white/10">
+          <button onClick={doLogout} className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl text-[12px] font-bold flex items-center justify-center gap-2">🚪 Logout - WORK!</button>
+          <p className="text-[8px] text-center mt-2 text-slate-500">Remaining disturb cheyale ✅</p>
+        </div>
       </aside>
 
       <main className="flex-1 min-w-0">
@@ -151,8 +164,8 @@ export default function Home() {
                   {rolesList.map((r, i) => {
                     const sel = role === r;
                     return (
-                      <div key={i} onClick={() => { setRole(r); setShowRoles(false); }} className={`px-4 py-3 flex justify-between items-center border-b border-white/10 hover:bg-white/10 cursor-pointer ${sel ? "bg-blue-500/10" : ""}`}>
-                        <span className="text-white text-[12px] font-bold">{r}</span><div className={`w-5 h-5 rounded-full border flex items-center justify-center ${sel ? "border-blue-400" : "border-white/30"}`}>{sel && <div className="w-2.5 h-2.5 bg-blue-400 rounded-full"></div>}</div>
+                      <div key={i} onClick={() => { setRole(r); setShowRoles(false); }} className={`px-4 py-3 flex justify-between items-center border-b border-white/10 hover:bg-white/10 cursor-pointer ${sel? "bg-blue-500/10" : ""}`}>
+                        <span className="text-white text-[12px] font-bold">{r}</span><div className={`w-5 h-5 rounded-full border flex items-center justify-center ${sel? "border-blue-400" : "border-white/30"}`}>{sel && <div className="w-2.5 h-2.5 bg-blue-400 rounded-full"></div>}</div>
                       </div>
                     );
                   })}
@@ -161,15 +174,18 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="ml-auto bg-[#1e293b] border border-white/10 px-2 py-1.5 rounded-xl flex items-center gap-2">
-            <div className="w-7 h-7 bg-blue-500 rounded-full flex items-center justify-center text-white text-[10px] font-bold">K</div>
-            <div><p className="text-white text-[10px] font-bold leading-3">Karthick<br />Founder</p><p className="text-[7px] text-slate-400">karthick@nexlance.in</p></div>
-            <span className="bg-[#a855f7]/20 text-[#d8b4fe] text-[7px] px-1.5 py-0.5 rounded">Founder</span>
+          <div className="ml-auto flex items-center gap-2">
+            <div className="bg-[#1e293b] border border-white/10 px-2 py-1.5 rounded-xl flex items-center gap-2">
+              <div className="w-7 h-7 bg-blue-500 rounded-full flex items-center justify-center text-white text-[10px] font-bold">K</div>
+              <div><p className="text-white text-[10px] font-bold leading-3">Karthick<br />Founder</p><p className="text-[7px] text-slate-400">karthick@nexlance.in</p></div>
+              <span className="bg-[#a855f7]/20 text-[#d8b4fe] text-[7px] px-1.5 py-0.5 rounded">Founder</span>
+            </div>
+            {/* LOGOUT IN HEADER - ADDED - EMI REMOVE CHEYALE DU */}
+            <button onClick={doLogout} className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl text-[10px] font-bold">🚪 Logout</button>
           </div>
         </div>
 
         <div className="p-4 bg-[#eef1f6] min-h-[calc(100vh-72px)]">
-
           {active === "Agent Worklist Queue" && (
             <div className="space-y-3">
               <div className="bg-[#0f172a] rounded-xl p-4 flex justify-between items-center">
@@ -202,21 +218,16 @@ export default function Home() {
 
               <div className="bg-white border rounded-xl p-4">
                 <h3 className="font-bold text-[12px] flex items-center gap-2">📞 Capture Borrower Disposition - WORK!</h3>
-
                 <div className="grid grid-cols-2 gap-3 mt-3">
                   <div><label className="text-[9px] text-slate-500">Contact Mode</label><select value={contactMode} onChange={(e) => setContactMode(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-[11px] mt-1 bg-white"><option>Call</option><option>Field Visit</option><option>WhatsApp</option><option>Email</option></select></div>
                   <div><label className="text-[9px] text-slate-500">Disposition Code (PRD Fixed List)</label><select value={disposition} onChange={(e) => setDisposition(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-[11px] mt-1 bg-white"><option>PTP Taken</option><option>Callback</option><option>Broken PTP</option><option>RTP</option><option>Customer Not Reachable</option></select></div>
                 </div>
-
                 <div className="grid grid-cols-2 gap-3 mt-3 bg-emerald-50/70 border border-emerald-100 rounded-xl p-3">
                   <div><label className="text-[9px] text-emerald-700 font-bold">Promised Amount (₹)</label><input value={promisedAmt} onChange={(e) => setPromisedAmt(e.target.value)} placeholder="e.g. 32000" className="w-full border border-emerald-200 rounded-lg px-3 py-2 text-[11px] mt-1 focus:border-emerald-400 outline-none" /></div>
                   <div><label className="text-[9px] text-slate-600">Promised Payment Date</label><select value={promisedDate} onChange={(e) => setPromisedDate(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-[11px] mt-1 bg-white"><option value="">Select Date</option><option>09/18/2026</option><option>09/19/2026</option><option>09/20/2026</option></select></div>
                 </div>
-
                 <div className="mt-3"><label className="text-[9px] text-slate-500">Next Follow-up Action Date *</label><select value={followUpDate} onChange={(e) => setFollowUpDate(e.target.value)} className="w-full border rounded-lg px-3 py-2 text-[11px] mt-1 bg-white"><option>09/17/2026</option><option>09/18/2026</option><option>09/19/2026</option><option>09/20/2026</option></select></div>
-
                 <div className="mt-3"><label className="text-[9px] text-slate-500">Activity Remarks (Free Text)</label><textarea value={remarks} onChange={(e) => setRemarks(e.target.value)} placeholder="Enter detailed call summary, borrower response, or commitment details..." className="w-full border rounded-lg px-3 py-2 text-[11px] mt-1 h-[60px] resize-none focus:border-blue-400 outline-none"></textarea></div>
-
                 <button onClick={saveDisposition} className="w-full bg-[#3b82f6] hover:bg-blue-700 text-white py-2.5 rounded-xl mt-4 font-bold text-[12px] flex items-center justify-center gap-2 transition-all">🕒 Save Disposition & Advance Queue - WORK!</button>
               </div>
 
@@ -274,11 +285,11 @@ export default function Home() {
           {active === "User & Role Admin" && (
             <div className="space-y-3">
               <div className="bg-[#0f172a] rounded-xl p-4 flex justify-between items-center"><div className="flex gap-3 items-center"><div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center">👥</div><div><h2 className="text-white font-bold text-[13px]">User & Access Management • Section 6 Security Compliance - WORK!</h2><p className="text-[8px] text-slate-400">Application-owned identity. Single-click disablement immediately terminates active sessions and logs to audit trail.</p></div></div><button onClick={() => setShowProvision(true)} className="bg-[#6366f1] text-white px-3 py-2 rounded-lg text-[9px] font-bold">✨ Provision New User - WORK!</button></div>
-              <div className="bg-white border rounded-xl overflow-hidden"><table className="w-full text-[9px]"><thead className="bg-slate-50 border-b"><tr><th className="text-left p-2">AGENT / USER ID</th><th>FULL NAME & EMAIL</th><th>ROLE</th><th>TEAM LEADER</th><th>2FA & AUTH STATUS</th><th>ACTION</th></tr></thead><tbody>{users.map((a) => <tr key={a.id} className="border-b hover:bg-blue-50/50"><td className="p-2.5 font-bold text-[10px]">{a.id}</td><td className="p-2.5"><p className="font-bold text-[10px]">{a.name}</p><p className="text-[8px] text-slate-500">{a.email}</p></td><td className="p-2.5"><span className="bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full text-[8px] font-bold">{a.role}</span></td><td className="p-2.5 text-[9px]">{a.tl}</td><td className="p-2.5"><span className="bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full text-[8px]">TOTP 2FA Active - WORK!</span></td><td className="p-2.5"><button onClick={() => { if (confirm(`Disable ${a.name}?`)) setUsers(users.filter((x) => x.id !== a.id)); }} className="bg-red-600 text-white px-2 py-1 rounded text-[8px] font-bold">1-Click Disable - WORK!</button></td></tr>)}</tbody></table></div>
+              <div className="bg-white border rounded-xl overflow-hidden"><table className="w-full text-[9px]"><thead className="bg-slate-50 border-b"><tr><th className="text-left p-2">AGENT / USER ID</th><th>FULL NAME & EMAIL</th><th>ROLE</th><th>TEAM LEADER</th><th>2FA & AUTH STATUS</th><th>ACTION</th></tr></thead><tbody>{users.map((a) => <tr key={a.id} className="border-b hover:bg-blue-50/50"><td className="p-2.5 font-bold text-[10px]">{a.id}</td><td className="p-2.5"><p className="font-bold text-[10px]">{a.name}</p><p className="text-[8px] text-slate-500">{a.email}</p></td><td className="p-2.5"><span className="bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full text-[8px] font-bold">{a.role}</span></td><td className="p-2.5 text-[9px]">{a.tl}</td><td className="p-2.5"><span className="bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full text-[8px]">TOTP 2FA Active - WORK!</span></td><td className="p-2.5"><button onClick={() => { if (confirm(`Disable ${a.name}?`)) setUsers(users.filter((x) => x.id!== a.id)); }} className="bg-red-600 text-white px-2 py-1 rounded text-[8px] font-bold">1-Click Disable - WORK!</button></td></tr>)}</tbody></table></div>
               {showProvision && (
                 <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[700] flex items-center justify-center p-4">
                   <div className="bg-white rounded-[12px] w-full max-w-[420px] shadow-2xl overflow-hidden border">
-                    <div className="p-6"><h3 className="font-bold text-[14px] mb-4">Provision New Application User</h3><div className="space-y-4"><div><label className="text-[11px] font-medium">Full Name</label><input value={form.fullName} onChange={(e) => setForm({ ...form, fullName: e.target.value })} placeholder="e.g. Ramesh Kumar" className="w-full border rounded-lg px-3 py-2.5 text-[12px] mt-1.5" /></div><div><label className="text-[11px] font-medium">Registered Contact Email</label><input value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} placeholder="ramesh@nexlance.in" className="w-full border rounded-lg px-3 py-2.5 text-[12px] mt-1.5" /></div><div className="grid grid-cols-2 gap-3"><div><label className="text-[11px] font-medium">Assigned Role</label><select value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} className="w-full border rounded-lg px-3 py-2.5 text-[12px] mt-1.5 bg-white"><option>Agent</option><option>Team Leader</option><option>Ops Manager</option><option>Founder</option><option>Auditor</option></select></div><div><label className="text-[11px] font-medium">Assign Team Leader</label><select value={form.teamLeader} onChange={(e) => setForm({ ...form, teamLeader: e.target.value })} className="w-full border rounded-lg px-3 py-2.5 text-[12px] mt-1.5 bg-white"><option>Select Team Leader</option>{teamLeaders.map((t) => <option key={t}>{t}</option>)}</select></div></div><div className="bg-blue-50/70 border border-blue-100 rounded-lg p-3"><p className="text-[10px] text-slate-600 leading-4"><span className="font-bold">PRD Rule:</span> User will receive initial credentials and be forced to set a 12+ character password and configure TOTP 2FA on first login.</p></div><div className="flex justify-end gap-2 pt-2"><button onClick={() => setShowProvision(false)} className="bg-slate-100 text-slate-600 px-4 py-2 rounded-lg text-[11px]">Cancel</button><button onClick={provisionUser} className="bg-[#6366f1] text-white px-5 py-2 rounded-lg text-[11px] font-bold">Provision User - WORK!</button></div></div></div>
+                    <div className="p-6"><h3 className="font-bold text-[14px] mb-4">Provision New Application User</h3><div className="space-y-4"><div><label className="text-[11px] font-medium">Full Name</label><input value={form.fullName} onChange={(e) => setForm({...form, fullName: e.target.value })} placeholder="e.g. Ramesh Kumar" className="w-full border rounded-lg px-3 py-2.5 text-[12px] mt-1.5" /></div><div><label className="text-[11px] font-medium">Registered Contact Email</label><input value={form.email} onChange={(e) => setForm({...form, email: e.target.value })} placeholder="ramesh@nexlance.in" className="w-full border rounded-lg px-3 py-2.5 text-[12px] mt-1.5" /></div><div className="grid grid-cols-2 gap-3"><div><label className="text-[11px] font-medium">Assigned Role</label><select value={form.role} onChange={(e) => setForm({...form, role: e.target.value })} className="w-full border rounded-lg px-3 py-2.5 text-[12px] mt-1.5 bg-white"><option>Agent</option><option>Team Leader</option><option>Ops Manager</option><option>Founder</option><option>Auditor</option></select></div><div><label className="text-[11px] font-medium">Assign Team Leader</label><select value={form.teamLeader} onChange={(e) => setForm({...form, teamLeader: e.target.value })} className="w-full border rounded-lg px-3 py-2.5 text-[12px] mt-1.5 bg-white"><option>Select Team Leader</option>{teamLeaders.map((t) => <option key={t}>{t}</option>)}</select></div></div><div className="bg-blue-50/70 border border-blue-100 rounded-lg p-3"><p className="text-[10px] text-slate-600 leading-4"><span className="font-bold">PRD Rule:</span> User will receive initial credentials and be forced to set a 12+ character password and configure TOTP 2FA on first login.</p></div><div className="flex justify-end gap-2 pt-2"><button onClick={() => setShowProvision(false)} className="bg-slate-100 text-slate-600 px-4 py-2 rounded-lg text-[11px]">Cancel</button><button onClick={provisionUser} className="bg-[#6366f1] text-white px-5 py-2 rounded-lg text-[11px] font-bold">Provision User - WORK!</button></div></div></div>
                   </div>
                 </div>
               )}
@@ -292,7 +303,6 @@ export default function Home() {
               <div className="bg-white border rounded-xl p-4"><h3 className="font-bold text-[11px] mb-3">System Evidentiary Log Trail (4 Records) - WORK!</h3><table className="w-full text-[9px]"><thead className="bg-slate-50 border-b"><tr><th className="text-left p-2">TIMESTAMP</th><th>LOG ID</th><th>ACTOR</th><th>ACTION</th><th>TARGET ENTITY</th></tr></thead><tbody><tr className="border-b hover:bg-slate-50"><td className="p-2.5">17/9/2026, 10:18:42 pm</td><td className="font-mono">LOG_1789663722962_62</td><td className="font-bold">Karthick Founder</td><td><span className="bg-slate-100 border px-2 py-0.5 rounded">LOGIN - WORK!</span></td><td>mis_export (CLI_KISSHT)</td></tr><tr className="border-b hover:bg-slate-50"><td className="p-2.5">17/9/2026, 10:18:33 pm</td><td className="font-mono">LOG_1789663713807_869</td><td className="font-bold">Karthick Founder</td><td><span className="bg-slate-100 border px-2 py-0.5 rounded">LOGIN</span></td><td>mis_export (CLI_KISSHT)</td></tr><tr className="border-b hover:bg-slate-50"><td className="p-2.5">10/9/2026, 10:53:23 am</td><td className="font-mono">LOG_1789017803843_415</td><td className="font-bold">Karthick Founder</td><td><span className="bg-slate-100 border px-2 py-0.5 rounded">LOGOUT</span></td><td>session (USR_FOUNDER)</td></tr><tr className="hover:bg-slate-50"><td className="p-2.5">10/9/2026, 10:50:04 am</td><td className="font-mono">LOG_1789017604953_148</td><td className="font-bold">Karthick Founder</td><td><span className="bg-slate-100 border px-2 py-0.5 rounded">LOGIN</span></td><td>mis_export (CLI_KISSHT)</td></tr></tbody></table></div>
             </div>
           )}
-
         </div>
       </main>
     </div>
