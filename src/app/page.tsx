@@ -1,64 +1,40 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 export default function Page() {
   const [screen, setScreen] = useState("LOGIN")
+  const [userId, setUserId] = useState("")
 
-  // Page reload ayina kuda dashboard lo ne undali ani
-  useEffect(()=>{
-    const saved = localStorage.getItem("nex_screen")
-    if(saved) setScreen(saved)
-  },[])
-
-  const goTo = (s:string) => {
-    localStorage.setItem("nex_screen", s)
-    setScreen(s)
+  const selectRole = (id:string) => {
+    setUserId(id)
   }
 
-  // --- FULL DASHBOARD (Nee 2nd Photo la) ---
   if (screen === "DASHBOARD") {
     return (
-      <div style={{display:'flex', minHeight:'100vh', fontFamily:'sans-serif', background:'#f0f4f8'}}>
-        <div style={{width:'250px', background:'#0f172a', color:'white', padding:'20px'}}>
-          <div style={{fontWeight:'bold', marginBottom:'30px', background:'#1e293b', padding:'10px', borderRadius:'6px'}}>NX Nexlance Collections System</div>
-          <div style={{background:'#2563eb', padding:'10px', borderRadius:'6px', marginBottom:'20px'}}>📊 Dashboards & MIS</div>
-          <div style={{fontSize:'12px', color:'#94a3b8', lineHeight:'35px'}}>
-            <div>📞 Agent Worklist Queue</div>
-            <div>📦 Allocation & Assignment</div>
-            <div>💰 Payment Recon & Queue</div>
-            <div>👤 Client Master</div>
-            <div>👥 User & Role Admin</div>
-            <div>🛡️ Audit Log & Compliance</div>
-          </div>
-          <button onClick={()=>{localStorage.clear(); setScreen("LOGIN")}} style={{marginTop:'40px', background:'red', color:'white', padding:'8px 15px', borderRadius:'6px', width:'100%'}}>Logout</button>
+      <div style={{display:'flex', minHeight:'100vh', fontFamily:'sans-serif', background:'#f1f5f9'}}>
+        <div style={{width:'240px', background:'#0f172a', color:'white', padding:'15px'}}>
+          <div style={{background:'#1e293b', padding:'10px', borderRadius:'8px', fontSize:'12px', fontWeight:'bold'}}>NX Nexlance Collections System</div>
+          <div style={{marginTop:'20px', fontSize:'11px', color:'#64748b'}}>MAIN NAVIGATION</div>
+          <div style={{background:'#2563eb', padding:'10px', borderRadius:'8px', marginTop:'10px', fontSize:'12px'}}>Dashboards & MIS</div>
+          <div style={{background:'#2563eb', padding:'10px', borderRadius:'8px', marginTop:'10px', fontSize:'12px'}}>Agent Worklist Queue</div>
+          <div style={{padding:'10px', fontSize:'12px', color:'#94a3b8'}}>Allocation & Assignment</div>
+          <button onClick={()=>setScreen("LOGIN")} style={{marginTop:'30px', background:'#ef4444', color:'white', padding:'8px', width:'100%', borderRadius:'6px'}}>Logout</button>
         </div>
-
         <div style={{flex:1, padding:'20px'}}>
-          <div style={{background:'#0f172a', color:'white', padding:'15px', borderRadius:'8px', display:'flex', justifyContent:'space-between'}}>
-            <b>Executive Oversight Dashboard - All Portfolio Clients - WORK!- Mundhu vunna dhani remove cheyale ✅</b>
-            <span style={{fontSize:'12px', background:'#1e293b', padding:'5px 10px', borderRadius:'4px'}}>All Portfolio Clients</span>
-          </div>
-          
-          <div style={{background:'white', padding:'20px', borderRadius:'8px', marginTop:'20px'}}>
-            <h3 style={{fontSize:'14px', marginBottom:'15px'}}>📊 DPD Bucket Reservation Summary</h3>
-            <div style={{display:'flex', justifyContent:'space-between', fontSize:'12px', color:'#666', borderBottom:'1px solid #eee', paddingBottom:'10px'}}>
-              <span>0-30 DPD</span><span>₹ 8,42,000</span><span>0%</span>
-            </div>
-            <div style={{display:'flex', justifyContent:'space-between', fontSize:'12px', color:'#666', paddingTop:'10px'}}>
-              <span>31-60 DPD</span><span>₹ 5,12,000</span><span>0%</span>
+          <div style={{background:'#0f172a', color:'white', padding:'12px', borderRadius:'8px', fontSize:'13px'}}>Agent Worklist - Priority Queue Mode</div>
+          <div style={{background:'white', padding:'15px', borderRadius:'8px', marginTop:'15px'}}>
+            <b>Amitabh Joshi</b> <span style={{background:'#fee2e2', color:'red', fontSize:'10px', padding:'2px 6px', borderRadius:'4px'}}>F2: Broken PTP</span>
+            <div style={{marginTop:'15px', display:'grid', gridTemplateColumns:'1fr 1fr 1fr 1fr', gap:'10px', fontSize:'11px', color:'#666'}}>
+              <div>MASKED PHONE<br/>XXXXXXXXXX</div>
+              <div>BORROWER CITY<br/>Pune</div>
+              <div>DPD BUCKET<br/><b>90+ DPD (105 Days)</b></div>
+              <div>TOTAL DUE<br/><b style={{color:'green'}}>₹2,42,000</b></div>
             </div>
           </div>
-
-          <div style={{background:'white', padding:'20px', borderRadius:'8px', marginTop:'20px', height:'250px'}}>
-            <h3 style={{fontSize:'14px'}}>📈 Daily Collections Trend (INR) - Pending Live - DIFFERENT <span style={{background:'#dcfce7', color:'green', padding:'2px 6px', borderRadius:'10px', fontSize:'10px'}}>LIVE</span></h3>
-            <div style={{marginTop:'40px', height:'150px', borderBottom:'1px solid #ddd', display:'flex', alignItems:'flex-end', gap:'10px'}}>
-              <div style={{flex:1, height:'30%', background:'linear-gradient(to top, #e0f2fe, #22c55e)', borderRadius:'10px 10px 0 0'}}></div>
-              <div style={{flex:1, height:'50%', background:'linear-gradient(to top, #e0f2fe, #22c55e)', borderRadius:'10px 10px 0 0'}}></div>
-              <div style={{flex:1, height:'70%', background:'linear-gradient(to top, #e0f2fe, #22c55e)', borderRadius:'10px 10px 0 0'}}></div>
-              <div style={{flex:1, height:'80%', background:'linear-gradient(to top, #e0f2fe, #22c55e)', borderRadius:'10px 10px 0 0'}}></div>
-              <div style={{flex:1, height:'65%', background:'linear-gradient(to top, #e0f2fe, #22c55e)', borderRadius:'10px 10px 0 0'}}></div>
-              <div style={{flex:1, height:'90%', background:'linear-gradient(to top, #e0f2fe, #22c55e)', borderRadius:'10px 10px 0 0'}}></div>
-            </div>
+          <div style={{background:'white', padding:'15px', borderRadius:'8px', marginTop:'15px'}}>
+            <div style={{fontSize:'12px', marginBottom:'10px'}}>Promised Amount (₹)</div>
+            <input style={{width:'100%', border:'1px solid #ddd', padding:'8px', borderRadius:'6px'}} placeholder="Enter amount"/>
+            <button style={{width:'100%', background:'#2563eb', color:'white', padding:'10px', borderRadius:'8px', marginTop:'15px', fontWeight:'bold'}}>Save Disposition & Advance Queue - WORK!</button>
           </div>
         </div>
       </div>
@@ -67,35 +43,72 @@ export default function Page() {
 
   if (screen === "OTP") {
     return (
-      <div style={{display:'flex', height:'100vh'}}>
-        <div style={{width:'50%', background:'black', color:'white', padding:'60px', display:'flex', flexDirection:'column', justifyContent:'center'}}>
-          <h1>Your security comes first.</h1>
-        </div>
-        <div style={{width:'50%', padding:'60px', display:'flex', flexDirection:'column', justifyContent:'center'}}>
-          <h2>Two-factor authentication</h2>
-          <p>Enter 6-digit code</p>
-          <div style={{display:'flex', gap:'15px', margin:'20px 0'}}>2 3 4 9 9 7</div>
-          <button onClick={()=>goTo("DASHBOARD")} style={{background:'black', color:'white', padding:'12px', borderRadius:'8px', cursor:'pointer', fontWeight:'bold'}}>
-            Verify & Continue to Dashboard
-          </button>
+      <div style={{minHeight:'100vh', background:'#0f172a', display:'flex', justifyContent:'center', alignItems:'center', fontFamily:'sans-serif'}}>
+        <div style={{background:'white', padding:'30px', borderRadius:'12px', width:'350px', textAlign:'center'}}>
+          <h2 style={{fontWeight:'bold'}}>Two-factor authentication</h2>
+          <p style={{fontSize:'13px', color:'#666'}}>Enter 6-digit code sent to your device</p>
+          <div style={{display:'flex', gap:'10px', justifyContent:'center', margin:'20px 0', fontSize:'20px', fontWeight:'bold'}}>
+            <span style={{border:'1px solid #ddd', padding:'8px 12px', borderRadius:'6px'}}>2</span>
+            <span style={{border:'1px solid #ddd', padding:'8px 12px', borderRadius:'6px'}}>3</span>
+            <span style={{border:'1px solid #ddd', padding:'8px 12px', borderRadius:'6px'}}>4</span>
+            <span style={{border:'1px solid #ddd', padding:'8px 12px', borderRadius:'6px'}}>9</span>
+            <span style={{border:'1px solid #ddd', padding:'8px 12px', borderRadius:'6px'}}>9</span>
+            <span style={{border:'1px solid #ddd', padding:'8px 12px', borderRadius:'6px'}}>7</span>
+          </div>
+          <button onClick={()=>setScreen("DASHBOARD")} style={{width:'100%', background:'#059669', color:'white', padding:'12px', borderRadius:'8px', fontWeight:'bold'}}>Verify & Continue</button>
         </div>
       </div>
     )
   }
 
   return (
-    <div style={{display:'flex', height:'100vh'}}>
-      <div style={{width:'50%', background:'black', color:'white', padding:'60px', display:'flex', flexDirection:'column', justifyContent:'center'}}>
-        <h1>NEXLANCE</h1>
-        <p style={{color:'#aaa'}}>Manage allocations, agent activity...</p>
-      </div>
-      <div style={{width:'50%', padding:'60px', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
-        <div style={{width:'100%', maxWidth:'350px'}}>
-          <h1 style={{textAlign:'center', fontWeight:'bold', fontSize:'28px'}}>Welcome back</h1>
-          <p style={{textAlign:'center', color:'#666', fontSize:'14px', marginBottom:'20px'}}>Sign in to your Nexlance account</p>
-          <input placeholder="Enter your User ID" style={{width:'100%', border:'1px solid #ccc', padding:'12px', borderRadius:'8px', marginBottom:'10px'}} />
-          <input placeholder="Enter your password" type="password" style={{width:'100%', border:'1px solid #ccc', padding:'12px', borderRadius:'8px'}} />
-          <button onClick={()=>goTo("OTP")} style={{marginTop:'20px', width:'100%', background:'black', color:'white', padding:'12px', borderRadius:'8px', fontWeight:'bold', cursor:'pointer'}}>Sign in</button>
+    <div style={{minHeight:'100vh', background:'#0f172a', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', fontFamily:'sans-serif', padding:'20px'}}>
+      <div style={{width:'48px', height:'48px', background:'#34d399', borderRadius:'12px', display:'flex', justifyContent:'center', alignItems:'center', fontSize:'24px', marginBottom:'15px'}}>⚡</div>
+      <h1 style={{color:'white', fontSize:'22px', fontWeight:'bold'}}>Nexlance Collections System</h1>
+      <p style={{color:'#94a3b8', fontSize:'11px', letterSpacing:'1px', marginBottom:'25px'}}>PRD V0.1 • MANDATORY TOTP 2FA • INTERNAL AUTH</p>
+      
+      <div style={{background:'white', width:'100%', maxWidth:'420px', borderRadius:'16px', padding:'25px'}}>
+        <label style={{fontSize:'11px', fontWeight:'bold', color:'#334155'}}>USER ID / AGENT CODE</label>
+        <div style={{display:'flex', alignItems:'center', border:'1px solid #e2e8f0', borderRadius:'10px', padding:'10px 12px', marginTop:'6px', background:'#f8fafc'}}>
+          <span style={{marginRight:'8px'}}>👤</span>
+          <input value={userId} onChange={(e)=>setUserId(e.target.value)} placeholder="e.g.  FOUNDER01,  AGENT01" style={{border:'none', outline:'none', width:'100%', background:'transparent', fontSize:'13px'}} />
+        </div>
+
+        <label style={{fontSize:'11px', fontWeight:'bold', color:'#334155', marginTop:'15px', display:'block'}}>PASSWORD</label>
+        <div style={{display:'flex', alignItems:'center', border:'1px solid #e2e8f0', borderRadius:'10px', padding:'10px 12px', marginTop:'6px', background:'#f8fafc'}}>
+          <span style={{marginRight:'8px'}}>🔒</span>
+          <input type="password" defaultValue="Password#1234" style={{border:'none', outline:'none', width:'100%', background:'transparent', fontSize:'13px'}} />
+        </div>
+
+        <button onClick={()=>setScreen("OTP")} style={{width:'100%', background:'#059669', color:'white', padding:'12px', borderRadius:'10px', fontWeight:'bold', marginTop:'18px', border:'none', cursor:'pointer', display:'flex', justifyContent:'center', alignItems:'center', gap:'6px'}}>
+          Continue to 2FA →
+        </button>
+
+        <div style={{borderTop:'1px solid #f1f5f9', marginTop:'20px', paddingTop:'15px'}}>
+          <p style={{fontSize:'11px', fontWeight:'bold', color:'#94a3b8', textAlign:'center', marginBottom:'10px'}}>QUICK ROLE SWITCHER (PRELOADED DEMO)</p>
+          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'8px'}}>
+            <div onClick={()=>selectRole("FOUNDER01")} style={{background:'#f5f3ff', border:'1px solid #ddd6fe', padding:'10px', borderRadius:'8px', cursor:'pointer'}}>
+              <div style={{fontSize:'12px', fontWeight:'bold', color:'#4c1d95'}}>Founder</div>
+              <div style={{fontSize:'10px', color:'#7c3aed'}}>FOUNDER01</div>
+            </div>
+            <div onClick={()=>selectRole("OPS01")} style={{background:'#eff6ff', border:'1px solid #bfdbfe', padding:'10px', borderRadius:'8px', cursor:'pointer'}}>
+              <div style={{fontSize:'12px', fontWeight:'bold'}}>Ops Manager</div>
+              <div style={{fontSize:'10px', color:'#2563eb'}}>OPS01</div>
+            </div>
+            <div onClick={()=>selectRole("TL01")} style={{background:'#fefce8', border:'1px solid #fde68a', padding:'10px', borderRadius:'8px', cursor:'pointer'}}>
+              <div style={{fontSize:'12px', fontWeight:'bold', color:'#854d0e'}}>Team Leader</div>
+              <div style={{fontSize:'10px', color:'#ca8a04'}}>TL01</div>
+            </div>
+            <div onClick={()=>selectRole("AGENT01")} style={{background:'#f0fdf4', border:'1px solid #bbf7d0', padding:'10px', borderRadius:'8px', cursor:'pointer'}}>
+              <div style={{fontSize:'12px', fontWeight:'bold', color:'#166534'}}>Agent (Calling)</div>
+              <div style={{fontSize:'10px', color:'#16a34a'}}>AGENT01</div>
+            </div>
+            <div onClick={()=>selectRole("AUDITOR01")} style={{background:'#f8fafc', border:'1px solid #e2e8f0', padding:'10px', borderRadius:'8px', gridColumn:'span 2', cursor:'pointer'}}>
+              <div style={{fontSize:'12px', fontWeight:'bold'}}>External Auditor (Read-Only)</div>
+              <div style={{fontSize:'10px', color:'#64748b'}}>AUDITOR01</div>
+            </div>
+          </div>
+          <p style={{fontSize:'10px', color:'#94a3b8', textAlign:'center', marginTop:'10px'}}>Password: Password#1234</p>
         </div>
       </div>
     </div>
