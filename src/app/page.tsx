@@ -1,42 +1,44 @@
-"use client";
-import { useState } from "react";
+"use client"
+import { useState } from "react"
 
-export default function LoginPage(){
-  const [code,setCode]=useState(""); 
-  const [pass,setPass]=useState("");
-  
-  const login=async()=>{
-    if(!code) return alert("ID pettu bro");
-    if(pass!=="Password#1234") return alert("Password: Password#1234 pettali");
-    const res=await fetch("/api/auth/login",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({agentCode:code,password:pass})
-    });
-    const d=await res.json();
-    if(d.tempToken){
-      document.cookie=`temp2faToken=${d.tempToken}; path=/; max-age=300`;
-      window.location.href="/2fa";
-    } else {
-      alert("Login fail - malli try");
-    }
+export default function Page() {
+  const [page, setPage] = useState("login")
+
+  if (page === "otp") {
+    return (
+      <div style={{display:'flex', height:'100vh'}}>
+        <div style={{width:'50%', background:'black', color:'white', padding:'60px'}}>
+          <h1>Your security comes first.</h1>
+          <p>Two-factor helps protect your account.</p>
+        </div>
+        <div style={{width:'50%', padding:'60px'}}>
+          <h2>Two-factor authentication</h2>
+          <p>Enter 6-digit code</p>
+          <div style={{display:'flex', gap:'10px', marginTop:'20px'}}>
+            <input value="2" style={{width:'40px', height:'40px', textAlign:'center'}} />
+            <input value="3" style={{width:'40px', height:'40px', textAlign:'center'}} />
+            <input value="4" style={{width:'40px', height:'40px', textAlign:'center'}} />
+            <input value="9" style={{width:'40px', height:'40px', textAlign:'center'}} />
+            <input value="9" style={{width:'40px', height:'40px', textAlign:'center'}} />
+            <input value="7" style={{width:'40px', height:'40px', textAlign:'center'}} />
+          </div>
+          <button style={{marginTop:'20px', width:'100%', background:'black', color:'white', padding:'10px'}}>Verifying...</button>
+        </div>
+      </div>
+    )
   }
 
-  return(
-    <div style={{minHeight:'100vh',background:'#0B1020',display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column',fontFamily:'sans-serif'}}>
-      <div style={{width:56,height:56,background:'#10b981',borderRadius:12,display:'flex',justifyContent:'center',alignItems:'center',fontSize:24}}>⚡</div>
-      <h2 style={{color:'white',marginTop:10}}>Nexlance Collections</h2>
-      <p style={{color:'#888',fontSize:10,letterSpacing:2}}>LOGIN - STEP 1</p>
-      <div style={{background:'white',padding:20,borderRadius:15,width:330,marginTop:15}}>
-        <label style={{fontSize:11,fontWeight:'bold'}}>USER ID</label>
-        <input value={code} onChange={e=>setCode(e.target.value.toUpperCase())} placeholder="FOUNDER01" style={{width:'100%',padding:12,border:'1px solid #ccc',borderRadius:10,marginTop:5}} />
-        <label style={{fontSize:11,fontWeight:'bold',marginTop:10,display:'block'}}>PASSWORD</label>
-        <input type="password" value={pass} onChange={e=>setPass(e.target.value)} placeholder="Password#1234" style={{width:'100%',padding:12,border:'1px solid #ccc',borderRadius:10,marginTop:5}} />
-        <button onClick={login} style={{width:'100%',background:'#10b981',color:'white',padding:12,borderRadius:10,marginTop:15,fontWeight:'bold',border:'none'}}>Continue to 2FA →</button>
-        <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:8,marginTop:15}}>
-          <button onClick={()=>{setCode("FOUNDER01"); setPass("Password#1234")}} style={{border:'1px solid #ddd',padding:8,borderRadius:8,fontSize:10}}>FOUNDER01</button>
-          <button onClick={()=>{setCode("AGENT01"); setPass("Password#1234")}} style={{border:'1px solid #ddd',padding:8,borderRadius:8,fontSize:10}}>AGENT01</button>
-        </div>
+  return (
+    <div style={{display:'flex', height:'100vh'}}>
+      <div style={{width:'50%', background:'black', color:'white', padding:'60px'}}>
+        <h1>NEXLANCE</h1>
+      </div>
+      <div style={{width:'50%', padding:'60px', textAlign:'center'}}>
+        <h1>Welcome back</h1>
+        <p>Sign in to your Nexlance account</p>
+        <input placeholder="Enter your User ID" style={{width:'100%', border:'1px solid gray', padding:'10px', marginTop:'20px'}} />
+        <input placeholder="Enter your password" style={{width:'100%', border:'1px solid gray', padding:'10px', marginTop:'10px'}} />
+        <button onClick={()=>setPage("otp")} style={{marginTop:'20px', width:'100%', background:'black', color:'white', padding:'12px'}}>Sign in</button>
       </div>
     </div>
   )
