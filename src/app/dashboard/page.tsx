@@ -102,7 +102,7 @@ export default function Home() {
     <div className="min-h-screen bg-[#eef1f6] flex font-sans">
       <aside className="w-[270px] bg-[#0f172a] text-slate-400 flex flex-col shrink-0">
         <div className="p-4 border-b border-white/10 flex gap-3">
-          <div className="w-11 h-11 bg-[#3b82f6] rounded-lg flex items-center justify-center text-white font-bold text-[18px]">NX</div>
+          <div className="w-11 h-11 bg-white rounded-lg flex items-center justify-center p-1"><img src="/logo.png" alt="Nexlance" className="h-full w-full object-contain" /></div>
           <div><div className="flex gap-2"><p className="text-white text-[13px] font-bold leading-4">Nexlance Collections<br />System</p><span className="bg-[#1e3a8a] text-blue-300 text-[7px] px-1.5 py-0.5 rounded h-fit">v1.0<br />System<br />of<br />Record</span></div><p className="text-[7px] mt-1 leading-3">NBFC Allocation • Agent<br />Worklist • PTP Recon • Audit<br />Trail</p></div>
         </div>
         <div className="px-5 py-4 text-[10px] tracking-widest">MAIN NAVIGATION</div>
@@ -116,7 +116,6 @@ export default function Home() {
           <button onClick={doLogout} className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded-xl text-[12px] font-bold">Logout</button>
         </div>
       </aside>
-
       <main className="flex-1 min-w-0">
         <div className="h-[72px] bg-[#0f172a] flex items-center gap-2 px-3 relative z-[300] border-b border-white/10">
           <div className="relative"><div onClick={() => { setShow2FA(!show2FA); setShowRoles(false); setShowClients(false); }} className="bg-[#1e293b] border border-emerald-500/30 text-emerald-300 px-3 py-1.5 rounded-xl text-[9px] leading-3 text-center cursor-pointer"><p className="font-bold">TOTP</p><p>2FA</p><p>Verified</p></div>{show2FA && (<div className="absolute top-[60px] left-0 w-[360px] bg-[#1a1d29] rounded-[16px] shadow-2xl z-[500] border border-emerald-500/30 overflow-hidden"><div className="bg-emerald-500/10 p-3"><p className="text-emerald-300 font-bold text-xs">TOTP 2FA Verified - {users.filter((u) => u.totp).length}/{users.length}</p></div>{users.map((r, i) => (<div key={i} className="px-4 py-2.5 flex justify-between border-b border-white/5"><span className="text-white text-[11px]">{r.name}</span><span className="bg-emerald-500/20 text-emerald-300 text-[9px] px-2 py-1 rounded-full">Verified</span></div>))}</div>)}</div>
@@ -126,7 +125,6 @@ export default function Home() {
             <button onClick={doLogout} className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-xl text-[10px] font-bold">Logout</button>
           </div>
         </div>
-
         <div className="p-4 bg-[#eef1f6] min-h-[calc(100vh-72px)]">
           {active === "Agent Worklist Queue" && (
             <div className="space-y-3">
@@ -139,7 +137,6 @@ export default function Home() {
               </div>
             </div>
           )}
-
           {active === "Dashboards & MIS" && (
             <div className="space-y-4">
               <div className="bg-[#0f172a] rounded-xl p-4 flex justify-between items-center"><div><h2 className="text-white font-bold text-[13px]">Executive Oversight Dashboard - {client}</h2><p className="text-[9px] text-slate-400">Role: {role} | Users: {users.length} | Live Graph</p></div><div className="flex gap-2"><div className="relative"><div onClick={() => setShowClients(!showClients)} className="bg-transparent border border-blue-500 text-white text-[10px] px-3 py-2 rounded-lg cursor-pointer w-[180px] flex justify-between">{client} <span>▼</span></div>{showClients && <div className="absolute top-[36px] right-0 w-[300px] bg-[#1a1d29] rounded-xl shadow-2xl z-[100] border border-white/10 overflow-hidden">{clients.map((c, i) => <div key={i} onClick={() => { setClient(c); setShowClients(false); }} className="px-4 py-3 text-white text-[12px] hover:bg-white/10 cursor-pointer border-b border-white/5">{c}</div>)}</div>}</div><button onClick={() => alert(`MIS Export`)} className="bg-[#10b981] text-white text-[8px] px-3 py-1.5 rounded-lg font-bold">1-Click MIS Export</button></div></div>
@@ -147,7 +144,6 @@ export default function Home() {
               <div className="bg-white border rounded-2xl p-4 shadow-sm"><div className="flex justify-between mb-3"><h3 className="font-bold text-[12px]">Daily Collections Trend (INR) - Running Live</h3><span className="text-[9px] bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full">Tick: {tick}</span></div><div className="relative h-[220px] w-full"><svg viewBox="0 0 700 200" className="w-full h-full"><defs><linearGradient id="gg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#10b981" stopOpacity="0.35" /><stop offset="100%" stopColor="#10b981" stopOpacity="0" /></linearGradient></defs><path d={areaD} fill="url(#gg1)" /><path d={pathD} fill="none" stroke="#10b981" strokeWidth="3" />{pts.map((p, i) => <circle key={i} cx={p.x} cy={p.y} r="4" fill="white" stroke="#10b981" strokeWidth="2" />)}</svg></div></div>
             </div>
           )}
-
           {active === "Allocation & Assignment" && (
             <div className="space-y-3">
               <div className="bg-[#0f172a] rounded-xl p-4 flex justify-between items-center"><div className="flex gap-3 items-center"><div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center">🔀</div><div><h2 className="text-white font-bold text-[13px]">Allocation Batch Upload & Assignment Engine</h2><p className="text-[8px] text-slate-400">Template validation, row-level error reporting, deduplication, Round Robin & Filter-based Assignment.</p></div></div><div className="flex gap-2"><div className="bg-[#3b82f6] text-white text-[9px] px-3 py-2 rounded-lg text-center">1<br />Upload<br />Batch</div><div className="bg-white/10 text-slate-400 text-[9px] px-3 py-2 rounded-lg text-center">2<br />Round<br />Robin</div><div className="bg-white/10 text-slate-400 text-[9px] px-3 py-2 rounded-lg text-center">3<br />Manual<br />Bulk<br />Filter</div></div></div>
@@ -155,7 +151,6 @@ export default function Home() {
               <div className="bg-white border rounded-xl p-4"><h3 className="font-bold text-[11px] mb-3">Ingested Batches History (2)</h3><div className="space-y-2"><div className="border rounded-lg p-3 flex justify-between"><div><p className="font-bold text-[11px]">Kissht_Delinquent_Sep2026.csv</p><p className="text-[9px] text-slate-500">Kissht Digital Finance - Records: 15</p></div><span className="bg-blue-50 text-blue-600 px-2 py-0.5 rounded text-[8px]">2026-09</span></div><div className="border rounded-lg p-3 flex justify-between"><div><p className="font-bold text-[11px]">HDFC_Personal_Sep2026.csv</p><p className="text-[9px] text-slate-500">HDFC Bank Personal Loans - Records: 10</p></div><span className="bg-blue-50 text-blue-600 px-2 py-0.5 rounded text-[8px]">2026-09</span></div></div></div>
             </div>
           )}
-
           {active === "Payment Recon & Queue" && (
             <div className="space-y-3">
               <div className="bg-[#0f172a] rounded-xl p-4 flex justify-between items-center"><div className="flex gap-3 items-center"><div className="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center">💳</div><div><h2 className="text-white font-bold text-[13px]">Payment Ingestion & Automated Reconciliation Engine</h2><p className="text-[8px] text-slate-400">Matches on client_id + loan_id</p></div></div><button className="bg-white/10 text-white text-[9px] px-3 py-2 rounded-lg">Download Sample Paid File</button></div>
@@ -163,14 +158,12 @@ export default function Home() {
               <div className="bg-white border rounded-xl p-4"><h3 className="font-bold text-[11px] mb-3">Reconciled Payment Stream (1)</h3><div className="bg-emerald-50 border border-emerald-200 rounded-lg p-3 flex justify-between"><div><p className="font-bold text-[11px]">Loan: HDFC-PL-77113</p><p className="text-[9px] text-slate-500">NEFT - 2026 09 04</p></div><span className="font-bold text-emerald-700 text-[12px]">₹2,01,000</span></div></div>
             </div>
           )}
-
           {active === "Client Master" && (
             <div className="space-y-3">
               <div className="bg-[#0f172a] rounded-xl p-4 flex justify-between items-center"><div className="flex gap-3 items-center"><div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center">🏢</div><div><h2 className="text-white font-bold text-[13px]">Client Master & Contract Governance</h2><p className="text-[8px] text-slate-400">Manage NBFC clients, contract durations, commission rates, and automated retention purge windows.</p></div></div><button className="bg-[#3b82f6] text-white text-[9px] px-3 py-2 rounded-lg font-bold">+ Add New NBFC Client</button></div>
               <div className="bg-white border rounded-xl p-4"><table className="w-full text-[9px]"><thead className="bg-slate-50 border-b"><tr><th className="text-left p-2">CLIENT ID</th><th>CLIENT NAME</th><th>CONTRACT WINDOW</th><th>COMMISSION STRUCTURE</th><th>DATA RETENTION WINDOW</th><th>STATUS</th></tr></thead><tbody><tr className="border-b"><td className="p-3 font-bold">CLI_KISSHT</td><td className="font-bold">Kissht Digital Finance</td><td>2025-01-01 to 2026-12-31</td><td className="text-blue-600 font-bold">8.5% of collection</td><td className="text-purple-600">90 Days Purge Window</td><td><span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[8px]">Active</span></td></tr><tr className="border-b"><td className="p-3 font-bold">CLI_HDFC</td><td className="font-bold">HDFC Bank Personal Loans</td><td>2024-06-01 to 2027-05-31</td><td className="text-blue-600 font-bold">10% for 90+ DPD, 6% for 30 DPD</td><td className="text-purple-600">180 Days Purge Window</td><td><span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[8px]">Active</span></td></tr><tr><td className="p-3 font-bold">CLI_BAJAJ</td><td className="font-bold">Bajaj Finance Consumer Durable</td><td>2025-03-15 to 2026-09-15</td><td className="font-bold">7.5% flat</td><td className="text-purple-600">120 Days Purge Window</td><td><span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[8px]">Active</span></td></tr></tbody></table></div>
             </div>
           )}
-
           {active === "User & Role Admin" && (
             <div className="space-y-3">
               <div className="bg-[#0f172a] rounded-xl p-4 flex justify-between items-center"><div className="flex gap-3 items-center"><div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center">👥</div><div><h2 className="text-white font-bold text-[13px]">User & Access Management - Security Compliance</h2><p className="text-[8px] text-slate-400">Application-owned identity. Single-click disablement immediately terminates active sessions and logs to audit trail.</p></div></div><button onClick={() => setShowProvision(true)} className="bg-[#6366f1] text-white px-3 py-2 rounded-lg text-[9px] font-bold">Provision New User</button></div>
@@ -184,7 +177,6 @@ export default function Home() {
               )}
             </div>
           )}
-
           {active === "Audit Log & Compliance" && (
             <div className="space-y-3">
               <div className="bg-[#0f172a] rounded-xl p-4 flex justify-between items-center"><div className="flex gap-3 items-center"><div className="w-8 h-8 bg-amber-500/20 rounded-lg flex items-center justify-center">🛡️</div><div><h2 className="text-white font-bold text-[13px]">Audit & Compliance Console - Read-Only Review</h2><p className="text-[8px] text-slate-400">Audit log is immutable. No delete permission exists for any role including Founder.</p></div></div><span className="bg-amber-900/50 text-amber-300 border border-amber-700/50 px-3 py-1.5 rounded-lg text-[8px] text-center">Read-Only<br />Privileges Active</span></div>
