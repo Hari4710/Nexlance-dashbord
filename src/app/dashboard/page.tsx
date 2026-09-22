@@ -102,8 +102,7 @@ export default function Home() {
     <div className="min-h-screen bg-[#eef1f6] flex font-sans">
       <aside className="w-[270px] bg-[#0f172a] text-slate-400 flex flex-col shrink-0">
         <div className="p-4 border-b border-white/10 flex gap-3">
-          {/* LOGO CHANGED HERE ONLY - REST SAME */}
-          <div className="w-11 h-11 bg-white rounded-lg flex items-center justify-center p-1"><img src="/logo.png" alt="Nexlance" className="h-full w-full object-contain" /></div>
+          <div className="w-11 h-11 bg-black rounded-xl flex items-center justify-center p-0 overflow-hidden ring-1 ring-white/20 shadow-[0_0_20px_rgba(99,102,241,0.4)]"><img src="/logo.png" alt="Nexlance" className="h-full w-full object-contain" /></div>
           <div><div className="flex gap-2"><p className="text-white text-[13px] font-bold leading-4">Nexlance Collections<br />System</p><span className="bg-[#1e3a8a] text-blue-300 text-[7px] px-1.5 py-0.5 rounded h-fit">v1.0<br />System<br />of<br />Record</span></div><p className="text-[7px] mt-1 leading-3">NBFC Allocation • Agent<br />Worklist • PTP Recon • Audit<br />Trail</p></div>
         </div>
         <div className="px-5 py-4 text-[10px] tracking-widest">MAIN NAVIGATION</div>
