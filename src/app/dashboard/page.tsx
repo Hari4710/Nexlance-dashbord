@@ -98,7 +98,6 @@ export default function Home() {
     setPromisedAmt(""); setRemarks("");
   };
 
-  // LIGHT PASTEL GRADIENT - NO RED, SOFT
   const lightGradient = "linear-gradient(90deg, #FDE68A 0%, #A7F3D0 20%, #93C5FD 40%, #C4B5FD 60%, #F9A8D4 80%, #FDBA74 100%)";
   const lightGlow = "linear-gradient(90deg, #FEF3C7 0%, #D1FAE5 25%, #DBEAFE 50%, #EDE9FE 75%, #FCE7F3 100%)";
 
@@ -113,7 +112,7 @@ export default function Home() {
           0%, 100% { transform: translateY(0px) scale(1); }
           50% { transform: translateY(-2px) scale(1.02); }
         }
-    .animated-logo { animation: softGlow 3s ease-in-out infinite, softFloat 3s ease-in-out infinite; }
+   .animated-logo { animation: softGlow 3s ease-in-out infinite, softFloat 3s ease-in-out infinite; }
       `}</style>
 
       <aside className="w-[280px] bg-[#0f172a] text-slate-400 flex flex-col shrink-0">
@@ -129,7 +128,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-
         <div className="px-5 py-4 text-[10px] tracking-widest font-bold">MAIN NAVIGATION</div>
         <nav className="px-3 space-y-2.5 flex-1">
           {menu.map((m) => {
@@ -164,7 +162,6 @@ export default function Home() {
             <button onClick={doLogout} className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-full text-[10px] font-bold">Logout</button>
           </div>
         </div>
-
         <div className="p-4 bg-[#eef1f6] min-h-[calc(100vh-72px)]">
           {active === "Agent Worklist Queue" && (
             <div className="space-y-3">
@@ -195,19 +192,19 @@ export default function Home() {
           {active === "Client Master" && (
             <div className="space-y-3">
               <div className="bg-[#0f172a] rounded-2xl p-4 flex justify-between items-center"><div className="flex gap-3 items-center"><div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">🏢</div><div><h2 className="text-white font-bold text-[13px]">Client Master & Contract Governance</h2><p className="text-[8px] text-slate-400">Manage NBFC clients, contract durations, commission rates, and automated retention purge windows.</p></div></div><button className="bg-[#3b82f6] text-white text-[9px] px-3 py-2 rounded-full font-bold">+ Add New NBFC Client</button></div>
-              <div className="bg-white border rounded-2xl p-4"><table className="w-full text-[9px]"><thead className="bg-slate-50 border-b"><tr><th className="text-left p-2">CLIENT ID</th><th>CLIENT NAME</th><th>CONTRACT WINDOW</th><th>COMMISSION STRUCTURE</th><th>DATA RETENTION WINDOW</th><th>STATUS</th></tr></thead><tbody><tr className="border-b"><td className="p-3 font-bold">CLI_KISSHT</td><td className="font-bold">Kissht Digital Finance</td><td>2025-01-01 to 2026-12-31</td><td className="text-blue-600 font-bold">8.5% of collection</td><td className="text-purple-600">90 Days Purge Window</td><td><span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[8px]">Active</span></td></tr><tr className="border-b"><td className="p-3 font-bold">CLI_HDFC</td><td className="font-bold">HDFC Bank Personal Loans</td><td>2024-06-01 to 2027-05-31</td><td className="text-blue-600 font-bold">10% for 90+ DPD, 6% for 30 DPD</td><td className="text-purple-600">180 Days Purge Window</td><td><span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[8px]">Active</span></td></tr><tr><td className="p-3 font-bold">CLI_BAJAJ</td><td className="font-bold">Bajaj Finance Consumer Durable</td><td>2025-03-15 to 2026-09-15</td><td className="font-bold">7.5% flat</td><td className="text-purple-600">120 Days Purge Window</td><td><span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[8px]">Active</span></td></tr></tbody></table></div>
+              <div className="bg-white border rounded-2xl p-4"><table className="w-full text-[9px]"><thead className="bg-slate-50 border-b"><tr><th className="text-left p-2">CLIENT ID</th><th>CLIENT NAME</th><th>CONTRACT WINDOW</th><th>COMMISSION STRUCTURE</th><th>DATA RETENTION WINDOW</th><th>STATUS</th></tr></thead><tbody><tr className="border-b"><td className="p-3 font-bold">CLI_KISSHT</td><td className="font-bold">Kissht Digital Finance</td><td>2025-01-01 to 2026-12-31</td><td className="text-blue-600 font-bold">8.5% of collection</td><td className="text-purple-600">90 Days Purge Window</td><td><span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-[8px]">Active</span></td></tr></tbody></table></div>
             </div>
           )}
           {active === "User & Role Admin" && (
             <div className="space-y-3">
-              <div className="bg-[#0f172a] rounded-2xl p-4 flex justify-between items-center"><div className="flex gap-3 items-center"><div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">👥</div><div><h2 className="text-white font-bold text-[13px]">User & Access Management - Security Compliance</h2><p className="text-[8px] text-slate-400">Application-owned identity. Single-click disablement immediately terminates active sessions and logs to audit trail.</p></div></div><button onClick={() => setShowProvision(true)} className="bg-[#6366f1] text-white px-3 py-2 rounded-full text-[9px] font-bold">Provision New User</button></div>
+              <div className="bg-[#0f172a] rounded-2xl p-4 flex justify-between items-center"><div className="flex gap-3 items-center"><div className="w-8 h-8 bg-white/10 rounded-full flex items-center justify-center">👥</div><div><h2 className="text-white font-bold text-[13px]">User & Access Management</h2><p className="text-[8px] text-slate-400">Application-owned identity. Single-click disablement logs to audit trail.</p></div></div><button onClick={() => setShowProvision(true)} className="bg-[#6366f1] text-white px-3 py-2 rounded-full text-[9px] font-bold">Provision New User</button></div>
               <div className="bg-white border rounded-2xl overflow-hidden"><table className="w-full text-[9px]"><thead className="bg-slate-50 border-b"><tr><th className="text-left p-2">AGENT / USER ID</th><th>FULL NAME & EMAIL</th><th>ROLE</th><th>TEAM LEADER</th><th>2FA & AUTH STATUS</th><th>ACTION</th></tr></thead><tbody>{users.map((a) => <tr key={a.id} className="border-b"><td className="p-2.5 font-bold text-[10px]">{a.id}</td><td className="p-2.5"><p className="font-bold text-[10px]">{a.name}</p><p className="text-[8px] text-slate-500">{a.email}</p></td><td className="p-2.5"><span className="bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full text-[8px] font-bold">{a.role}</span></td><td className="p-2.5 text-[9px]">{a.tl}</td><td className="p-2.5"><span className="bg-emerald-50 text-emerald-700 border border-emerald-200 px-2 py-0.5 rounded-full text-[8px]">TOTP 2FA Active</span></td><td className="p-2.5"><button onClick={() => { if (confirm(`Disable ${a.name}?`)) setUsers(users.filter((x) => x.id!== a.id)); }} className="bg-red-600 text-white px-2 py-1 rounded-full text-[8px] font-bold">1-Click Disable</button></td></tr>)}</tbody></table></div>
             </div>
           )}
           {active === "Audit Log & Compliance" && (
             <div className="space-y-3">
-              <div className="bg-[#0f172a] rounded-2xl p-4 flex justify-between items-center"><div className="flex gap-3 items-center"><div className="w-8 h-8 bg-amber-500/20 rounded-full flex items-center justify-center">🛡️</div><div><h2 className="text-white font-bold text-[13px]">Audit & Compliance Console - Read-Only Review</h2><p className="text-[8px] text-slate-400">Audit log is immutable. No delete permission exists for any role including Founder.</p></div></div><span className="bg-amber-900/50 text-amber-300 border border-amber-700/50 px-3 py-1.5 rounded-full text-[8px] text-center">Read-Only<br />Privileges Active</span></div>
-              <div className="bg-white border rounded-2xl p-4"><h3 className="font-bold text-[11px] mb-3">System Evidentiary Log Trail (4 Records)</h3><table className="w-full text-[9px]"><thead className="bg-slate-50 border-b"><tr><th className="text-left p-2">TIMESTAMP</th><th>LOG ID</th><th>ACTOR</th><th>ACTION</th><th>TARGET ENTITY</th></tr></thead><tbody><tr className="border-b"><td className="p-2.5">17/9/2026, 10:18:42 pm</td><td className="font-mono">LOG_1789663722962_62</td><td className="font-bold">Karthick Founder</td><td><span className="bg-slate-100 border px-2 py-0.5 rounded-full">LOGIN</span></td><td>mis_export (CLI_KISSHT)</td></tr></tbody></table></div>
+              <div className="bg-[#0f172a] rounded-2xl p-4 flex justify-between items-center"><div className="flex gap-3 items-center"><div className="w-8 h-8 bg-amber-500/20 rounded-full flex items-center justify-center">🛡️</div><div><h2 className="text-white font-bold text-[13px]">Audit & Compliance Console - Read-Only Review</h2><p className="text-[8px] text-slate-400">Audit log is immutable.</p></div></div><span className="bg-amber-900/50 text-amber-300 border border-amber-700/50 px-3 py-1.5 rounded-full text-[8px] text-center">Read-Only<br />Privileges Active</span></div>
+              <div className="bg-white border rounded-2xl p-4"><h3 className="font-bold text-[11px] mb-3">System Evidentiary Log Trail</h3><table className="w-full text-[9px]"><thead className="bg-slate-50 border-b"><tr><th className="text-left p-2">TIMESTAMP</th><th>LOG ID</th><th>ACTOR</th><th>ACTION</th><th>TARGET ENTITY</th></tr></thead><tbody><tr className="border-b"><td className="p-2.5">17/9/2026, 10:18:42 pm</td><td className="font-mono">LOG_1789663722962_62</td><td className="font-bold">Karthick Founder</td><td><span className="bg-slate-100 border px-2 py-0.5 rounded-full">LOGIN</span></td><td>mis_export (CLI_KISSHT)</td></tr></tbody></table></div>
             </div>
           )}
         </div>
