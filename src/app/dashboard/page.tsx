@@ -109,17 +109,22 @@ export default function Home() {
           0%, 100% { transform: translateY(0px) scale(1); }
           50% { transform: translateY(-2px) scale(1.05); }
         }
-       .animated-logo { animation: logoGlow 2.5s ease-in-out infinite, logoFloat 3s ease-in-out infinite; }
+      .animated-logo { animation: logoGlow 2.5s ease-in-out infinite, logoFloat 3s ease-in-out infinite; }
       `}</style>
 
       <aside className="w-[270px] bg-[#0f172a] text-slate-400 flex flex-col shrink-0">
         <div className="p-4 border-b border-white/10 flex gap-3">
-          {/* ANIMATED LOGO - BLACK BG + GRADIENT GLOW */}
+          {/* LOGO WITH OLD GLOW ANIMATION - NO NBFC TEXT */}
           <div className="relative w-11 h-11 bg-black rounded-xl flex items-center justify-center p-1 overflow-hidden ring-1 ring-white/20 animated-logo">
             <div className="absolute inset-0 bg-gradient-to-r from-[#D4B000] via-[#3B82F6] via-[#8B5CF6] to-[#FF8C42] opacity-25 animate-pulse rounded-xl"></div>
             <img src="/logo.png" alt="Nexlance" className="h-full w-full object-contain relative z-10" />
           </div>
-          <div><div className="flex gap-2"><p className="text-white text-[13px] font-bold leading-4">Nexlance Collections<br />System</p><span className="bg-[#1e3a8a] text-blue-300 text-[7px] px-1.5 py-0.5 rounded h-fit">v1.0<br />System<br />of<br />Record</span></div><p className="text-[7px] mt-1 leading-3">NBFC Allocation • Agent<br />Worklist • PTP Recon • Audit<br />Trail</p></div>
+          <div>
+            <div className="flex gap-2">
+              <p className="text-white text-[13px] font-bold leading-4">Nexlance Collections<br />System</p>
+              <span className="bg-[#1e3a8a] text-blue-300 text-[7px] px-1.5 py-0.5 rounded h-fit">v1.0<br />System<br />of<br />Record</span>
+            </div>
+          </div>
         </div>
         <div className="px-5 py-4 text-[10px] tracking-widest">MAIN NAVIGATION</div>
         <nav className="p-3 space-y-2 flex-1">
@@ -131,7 +136,7 @@ export default function Home() {
                 onClick={() => setActive(m)}
                 className={`px-4 py-3.5 rounded-full cursor-pointer text-[13px] flex items-center gap-3 transition-all duration-300
                 ${sel
-                ? "bg-gradient-to-r from-[#D4B000] via-[#3B82F6] via-[#8B5CF6] to-[#FF8C42] text-[#1a1033] font-bold shadow-[0_4px_20px_rgba(251,146,60,0.5)] scale-[1.02]"
+               ? "bg-gradient-to-r from-[#D4B000] via-[#3B82F6] via-[#8B5CF6] to-[#FF8C42] text-[#1a1033] font-bold shadow-[0_4px_20px_rgba(251,146,60,0.5)] scale-[1.02]"
                   : "hover:bg-white/10 text-slate-400 hover:text-white bg-white/[0.03]"}`}
               >
                 <span className="text-[14px]">{m === "Dashboards & MIS"? "📊" : m.includes("Agent")? "📞" : m.includes("Allocation")? "🔀" : m.includes("Payment")? "💳" : m.includes("Client")? "🏢" : m.includes("User")? "👥" : "🛡️"}</span>
